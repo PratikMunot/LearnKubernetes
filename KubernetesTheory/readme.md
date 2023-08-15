@@ -33,3 +33,41 @@
 >
 > That's how Kubernetes comes to the rescue! Kubernetes provides you with a framework to run distributed systems resiliently. It takes care of scaling and failover for your application, provides deployment patterns, and more. For example, Kubernetes can easily manage a canary deployment for your system.
 
+
+
+The need for container orchestration tool – 
+-	Trend from monolithic to microservices
+-	Increased usage of containers
+-	Demand for a proper way of managing those hundreds of containers
+Features of container orchestration tool (Kunbernetes)–
+-	High Availability or no downtime 
+-	Scalability or high performance
+-	Disaster Recovery – backup and restore 
+-	Automatic bin packaging
+-	Service discovery and load balancing
+-	Storage orchestration and self healing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
