@@ -131,18 +131,6 @@ Its like a cluster gateway which gets request or queries from any client.
 
 ## Other Kubernetes Components
 
-### Ingress 
-> The request we make from browser first goes to ingress and ingress then forwards it to Service.
-> https://myapp.com    is the ingress and ingress reroutes it to http://124.89.10.12:8080 which is basically a service.
-
-### ConfigMap  
-> Its an external configuration of the application.
-> It contains configuration data of urls of database or some other services we use.
-
-### Secret 
-> Secret is same as configMap but it is used to store secret data like db username and db password or other credentials.
-> Data is not stored in plain text format but in base64 encoded
-
 ### Volumes 
 > It attaches physical storage on harddrive to your pod to the local hardrive or cloud storage or other VM etc
 > Kubernetes/k8s cluster is not responsible for managing the data and storing it persistently. We as an administrator are responsible for managing and storing and replicating the data.
@@ -197,8 +185,6 @@ Its like a cluster gateway which gets request or queries from any client.
 ### Nodes
 > Node is a Server. Either physical server or a virtual server.
 > There can be multiple nodes in a Kubernetes cluster and they can spread across different data centers
-> Inside node there is pod When a pod dies a new pod arrives with new IP. Also when we scale up the PODs, all the newly added pods are also having new and different Ips. When we scale down then we may shut the pods which clients might be using. So depending on PODs IP is very unreliable and risky. To solve this problem we have service object which sits in front of the pods and provides a stable IP and DNS name 
-
 
 
 ### Service   
@@ -215,6 +201,18 @@ needing to keep track of which physical pods actually make up the service.
 > External service – is a service which we create inorder to open services to external sources(open application in browser)
 > Internal Service is service which we create inorder to communicate internally within a node
 
+
+### Ingress 
+> The request we make from browser first goes to ingress and ingress then forwards it to Service.
+> https://myapp.com    is the ingress and ingress reroutes it to http://124.89.10.12:8080 which is basically a service.
+
+### ConfigMap  
+> Its an external configuration of the application.
+> It contains configuration data of urls of database or some other services we use.
+
+### Secret 
+> Secret is same as configMap but it is used to store secret data like db username and db password or other credentials.
+> Data is not stored in plain text format but in base64 encoded
 
 ### Labels and Selectors
 > Every POD can have labels added on it and similarly the Service will have selectors added on it.
