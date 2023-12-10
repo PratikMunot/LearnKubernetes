@@ -198,9 +198,10 @@ needing to keep track of which physical pods actually make up the service.
 > - Blueprint of our pod is known as Deployments.
 > - Since pod is a layer of abstraction on top of containers, here deployment is another layer of abstraction on top of pods
 > - In practice we don’t create pods, we create deployments in which we describe the desired state of a pod or a replica set, in a yaml file. The deployment controller then gradually updates the environment (for example, creating or deleting replicas) until the current state matches the desired state specified in the deployment file.
-> - For example, if the yaml file defines 2 replicas for a pod but only one is currently running, an extra one will get created. Note that replicas managed via a deployment should not be manipulated directly, only via new deployments.
 > - The yaml file is read by apiserver and then, the apiserver then transfers this info to deployment controller and the DC quickly provisions the components we had asked for.
-> - If a pod dies or crashes abruptly then the desired state and current state are in mismatch. The responsibility of maintaining exact number of pods is with replicaset controller which manages the replicas of pod.   
+> - If a pod dies or crashes abruptly then the desired state and current state are in mismatch. The responsibility of maintaining exact number of pods is with replicaset controller which manages the replicas of pod. 
+> - For example, if the yaml file defines 2 replicas for a pod but only one is currently running, an extra one will get created. Note that replicas managed via a deployment should not be manipulated directly, only via new deployments.
+> - If one of the replica of your appliation pod dies then service will forward the requst to another pod from next replica and hence the application will still be accissible to user. However if the DB pod dies then service cannot forward request to new DB pod replica because DB cant be replicated via deployment because different pods will be reading and writing data to the DB and if we have multiple DB pod replicas there will always be data inconsistencies. Hence we need to have statefulset for DBs.
 
 ------------------------
 In the most basic cluster there can be 2 master nodes and 3 worker nodes. As the demand increase we can add more nodes in our cluster. The way we add new master node is like we should get a new bare server, then install all the master processes on it and add it to the Kubernetes cluster. And if we want to add new worker nodes then similar process like master one just install worker processes instead of master processes and add it to the cluster
@@ -211,9 +212,9 @@ It creates virtual box on your laptop and node runs in that virtual box. It’s 
 
 
 ### StatefulSet 
-> Deployment is only used to create stateless apps where as for statefull thing like databases there is another Kubernetes component which is used to create and manage it which is StatefullSet.
 > StatefulSet just like Deployment take care of replicating the PODS and scaling them up or down but making sure that database reads and writes are synchronized so that there are no db inconsistencies left
-
+> Deployment is only used to create stateless apps where as for statefull thing like databases there is another Kubernetes component which is used to create and manage it which is StatefullSet.
+> Deploying DB applications via stateful sets can be much difficult and so DBs are often hosted outside the kubernetes cluster and just have the deployment of stateless application running on the cluster.  
 
 ### Labels and Selectors
 > Every POD can have labels added on it and similarly the Service will have selectors added on it.
