@@ -23,15 +23,23 @@ OR
 # minikube start --driver=none
 ```
 
-
 Cluster Status
 ```
 # minikube status
 ```
 
+-----------
+> This is how the layer of abstraction works - 
+> - Deployment manages Replicaset
+> - Replicaset manages Pods
+> - Pod is an abstraction over containers
+> - Everything below the Deployment should be automatically managed by Kubernetes
+
 
 # PODS
-Get details of Pods / Display all pods
+All the following commands will show things with respect to current namespace which we have set. 
+If you have multiple namespaces then you need to append this: -n namespacename
+- Get details of Pods / Display all pods
 ```
 # kubectl get pod
 # kubectl get pod -o wide
@@ -83,12 +91,23 @@ Display all available info and details of Replicaset
 
 
 # Deployment
+
 Get Deployment details
 ```
 # kubectl get deployment
 # kubectl get deployment -o wide
 # kubectl get deployment -o yaml
 # kubectl get deployment -o json
+
+
+# kubectl get pod
+NAME                                  READY   STATUS    RESTARTS   AGE
+nginx-depl-56cb8b6d7-qzcnz            1/1     Running   0          3m20s
+
+If you carefully observe the name of pod the distribution is -
+Pod name         - nginx-depl-56cb8b6d7-qzcnz
+Replicaset name  - nginx-depl-56cb8b6d7 
+Deployment name  - nginx-depl
 
 ```
 
